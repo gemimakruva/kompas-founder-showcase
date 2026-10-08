@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kompas Founder</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:wght@600;700&display=swap">
+  <style>
+    :root {
+      --bg: #FAFAF8;
+      --fg: #1A1A1A;
+      --muted: #6B6B6B;
+      --accent: #2D5A27;
+      --accent-light: #E8F0E7;
+      --surface: #FFFFFF;
+      --border: #E2E0DB;
+      --dim-number: #D4D0C8;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #141414;
+        --fg: #E8E6E1;
+        --muted: #9C9C9C;
+        --accent: #6DBF65;
+        --accent-light: #1A2E18;
+        --surface: #1E1E1E;
+        --border: #2E2E2E;
+        --dim-number: #2A2A2A;
+        color-scheme: dark;
+      }
+    }
+    :root[data-theme="dark"] {
+      --bg: #141414;
+      --fg: #E8E6E1;
+      --muted: #9C9C9C;
+      --accent: #6DBF65;
+      --accent-light: #1A2E18;
+      --surface: #1E1E1E;
+      --border: #2E2E2E;
+      --dim-number: #2A2A2A;
+      color-scheme: dark;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: 'Inter', system-ui, sans-serif;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    header {
+      padding: 60px 0 40px;
+      text-align: center;
+    }
+
+    header .badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-light);
+      padding: 4px 12px;
+      border-radius: 4px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      line-height: 1.15;
+      text-wrap: balance;
+      margin-bottom: 16px;
+    }
+    @media (max-width: 600px) {
+      h1 { font-size: 1.75rem; }
+    }
+
+    header p {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin: 48px 0;
+    }
+    @media (max-width: 500px) {
+      .stats { grid-template-columns: 1fr; }
+    }
+
+    .stat {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px 20px;
+      text-align: center;
+    }
+
+    .stat .number {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .stat .label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    section {
+      margin-bottom: 48px;
+    }
+
+    h2 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .flow {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .flow-step {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+
+    .flow-step .step-marker {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--accent-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.875rem;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .flow-step .step-content {
+      padding: 8px 0 32px;
+      min-width: 0;
+    }
+
+    .flow-step .step-content h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .flow-step .step-content p {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .dimensions {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    @media (max-width: 500px) {
+      .dimensions { grid-template-columns: 1fr; }
+    }
+
+    .dim {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px 18px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .dim .dim-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 6px;
+      background: var(--accent-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .dim .dim-text {
+      min-width: 0;
+    }
+
+    .dim .dim-text strong {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+
+    .dim .dim-text span {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .tech-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tech-tag {
+      font-size: 0.8rem;
+      font-weight: 500;
+      padding: 6px 14px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--fg);
+    }
+
+    .claude-tag {
+      background: var(--accent-light);
+      border-color: var(--accent);
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 0;
+      text-align: center;
+      margin-top: 24px;
+    }
+
+    footer p {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="badge">Founder Assessment Platform</div>
+      <h1>Kompas Founder</h1>
+      <p>48 questions. 7 dimensions. 512 unique founder DNA profiles. One personalized report.</p>
+    </header>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="number">48</div>
+        <div class="label">Questions</div>
+      </div>
+      <div class="stat">
+        <div class="number">512</div>
+        <div class="label">DNA Profiles</div>
+      </div>
+      <div class="stat">
+        <div class="number">4</div>
+        <div class="label">Archetypes</div>
+      </div>
+    </div>
+
+    <section>
+      <h2>How it works</h2>
+      <div class="flow">
+        <div class="flow-step">
+          <div class="step-marker">1</div>
+          <div class="step-content">
+            <h3>Take the assessment</h3>
+            <p>48 targeted questions about how you make decisions, handle risk, lead teams, and build. Takes about 15 minutes.</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="step-marker">2</div>
+          <div class="step-content">
+            <h3>Claude analyzes your responses</h3>
+            <p>Your answers are processed through our psychometric model. Claude interprets the patterns across 7 dimensions to determine your founder archetype and DNA profile.</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="step-marker">3</div>
+          <div class="step-content">
+            <h3>Get your report</h3>
+            <p>A personalized PDF covering your archetype, dimensional scores, DNA profile breakdown, and coaching recommendations written specifically for your pattern.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>7 Dimensions</h2>
+      <div class="dimensions">
+        <div class="dim">
+          <div class="dim-icon">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7" stroke="currentColor" stroke-width="1.5" fill="none" style="color:var(--accent)"/><path d="M9 5v4l3 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" style="color:var(--accent)"/></svg>
+          </div>
+          <div class="dim-text">
+            <strong>Decision Speed</strong>
+            <span>How fast you commit</span>
+          </div>
+        </div>
+        <div class="dim">
+          <div class="dim-icon">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 14l4-5 3 3 5-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"/></svg>
+          </div>
+          <div class="dim-text">
+            <strong>Risk Tolerance</strong>
+            <span>Your comfort with uncertainty</span>
+          </div>
+        </div>
+        <div class="dim">
+          <div class="dim-icon">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="6" r="3" stroke="currentColor" stroke-width="1.5" fill="none" style="color:var(--accent)"/><path d="M3 16c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="currentColor" stroke-width="1.5" fill="none" style="color:var(--accent)"/></svg>
+          </div>
+          <div class="dim-text">
+            <strong>Leadership Style</strong>
+            <span>How you direct others</span>
+          </div>
+        </div>
+        <div class="dim">
+          <div class="dim-icon">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="3" y="3" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.5" fill="none" style="color:var(--accent)"/><path d="M7 9h4M9 7v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" style="color:var(--accent)"/></svg>
+          </div>
+          <div class="dim-text">
+            <strong>Execution Bias</strong>
+            <span>Plan vs. act tendency</span>
+          </div>
+        </div>
+        <div class="dim">
+          <div class="dim-icon">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2l2 4h4l-3 3 1 4-4-2-4 2 1-4-3-3h4z" stroke="currentColor" stroke-width="1.5" fill="none" style="color:var(--accent)"/></svg>
+          </div>
+          <div class="dim-text">
+            <strong>Vision Scope</strong>
+            <span>Short vs. long-term focus</span>
+          </div>
+        </div>
+        <div class="dim">
+          <div class="dim-icon">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="6" cy="9" r="3" stroke="currentColor" stroke-width="1.5" fill="none" style="color:var(--accent)"/><circle cx="12" cy="9" r="3" stroke="currentColor" stroke-width="1.5" fill="none" style="color:var(--accent)"/></svg>
+          </div>
+          <div class="dim-text">
+            <strong>Collaboration Mode</strong>
+            <span>Solo vs. team builder</span>
+          </div>
+        </div>
+        <div class="dim">
+          <div class="dim-icon">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 13V5l5 4-5 4zM9 13V5l5 4-5 4z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linejoin="round" style="color:var(--accent)"/></svg>
+          </div>
+          <div class="dim-text">
+            <strong>Adaptability</strong>
+            <span>Response to change</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Tech stack</h2>
+      <div class="tech-row">
+        <span class="tech-tag claude-tag">Claude API</span>
+        <span class="tech-tag">Laravel 12</span>
+        <span class="tech-tag">Filament 3</span>
+        <span class="tech-tag">Livewire 3</span>
+        <span class="tech-tag">PostgreSQL</span>
+      </div>
+    </section>
+
+    <footer>
+      <p>Built by <a href="https://makruva.com">Makruva Intelligence Lab</a></p>
+    </footer>
+  </div>
+</body>
+</html>
